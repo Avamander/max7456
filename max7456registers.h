@@ -68,7 +68,6 @@ union REG_VM0 {
 
     /**@brief don't care*/
     unsigned char unused : 1;
-
   } bits;
 };
 
@@ -85,7 +84,6 @@ union REG_VM1 {
 	 * @var bits
 	 * @brief access to individual bits*/
   struct {
-
     /**@brief Blinking Duty Cycle (On:Off)
 		 * @li b00 (0) = BT:BT
 		 * @li b01 (1) = BT:(2*BT)
@@ -148,7 +146,6 @@ union REG_HOS {
 
     /**@brief Don't care*/
     unsigned char unsused : 2;
-
   } bits;
 };
 
@@ -161,6 +158,7 @@ union REG_HOS {
 union REG_VOS {
   /**@brief The whole register value*/
   unsigned char whole;
+
   /**
 	 * @var bits
 	 * @brief access to individual bits*/
@@ -175,9 +173,9 @@ union REG_VOS {
 		 * @li b1 1111 (31) = Farthest down (-15 pixels)
 		 */
     unsigned char verticalPositionOffset : 5;
+
     /**@brief Don't care*/
     unsigned char unsused : 3;
-
   } bits;
 };
 
@@ -189,6 +187,7 @@ union REG_VOS {
 union REG_DMM {
   /**@brief The whole register value*/
   unsigned char whole;
+
   /**
 	 * @var bits
 	 * @brief access to individual bits*/
@@ -205,11 +204,13 @@ union REG_DMM {
 		If the Clear Display Memory bit is set, this bit is reset internally.
 		 */
     unsigned char autoIncrementMode : 1;
+
     /**@brief Vertical Sync Clear (Valid only when clear display memory = 1, (DMM[2] = 1) )
 		 * @li 0 = Immediately applies the clear display-memory command, DMM[2] = 1
 		 * @li 1 = Applies the clear display-memory command, DMM[2] = 1, at the next VSYNC time
 		 */
     unsigned char verticalSynchClear : 1;
+
     /**@brief Clear Display Memory
 		 * @li 0 = Inactive
 		 * @li 1 = Clear (fill all display memories with zeros)
@@ -222,23 +223,27 @@ union REG_DMM {
 		 * c) Immediately following the rising edge of CS after VM0[1] has been set to 1
 		 */
     unsigned char clearDisplayMemory : 1;
+
     /**@brief Invert Bit (applies to characters written in 16-bit operating mode)
 		 * @li 0 = Normal (white pixels display white, black pixels display black)
 		 * @li 1 = Invert (white pixels display black, black pixels display white)
 		 */
     unsigned char INV : 1;
+
     /**@brief Blink Bit (applies to characters written in 16-bit operating mode)
 		 * @li 0 = Blinking off
 		 * @li 1 = Blinking on
 		 * @note Blinking rate and blinking duty cycle data in the Video Mode 1 (VM1) register are used for blinking control
 		 */
     unsigned char BLK : 1;
+
     /**@brief Local Background Control Bit (applies to characters written in 16-bit operating mode)
 		 * @li 0 = sets the background pixels of the character to the video input (VIN) when in external sync mode.
 		 * @li 1 = sets the background pixels of the character to the background mode brightness level defined by VM1[6:4] in external or internal sync mode.
 		 * @note In internal sync mode, the local background control bit behaves as if it is set to 1
 		 */
     unsigned char LBC : 1;
+
     /**@brief Operation Mode Selection
 		 * @li 0 = 16-bit operation mode
 		 * @li 1 = 8-bit operation mode
@@ -247,7 +252,6 @@ union REG_DMM {
 
     /**@brief Don't care*/
     unsigned char unsused : 1;
-
   } bits;
 };
 
@@ -585,7 +589,6 @@ struct PIXEL {
   byte pix2 : 2;
   /**@brief 2nd pixel*/
   byte pix1 : 2;
-
   /**@brief 1st pixel*/
   byte pix0 : 2;
 };

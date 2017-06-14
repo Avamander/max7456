@@ -16,6 +16,7 @@ void Max7456::setBlinkParams(byte blinkBase, byte blinkDC) {
   // Datasheet page 26
   _regVm1.bits.blinkingTime = blinkBase;
   _regVm1.bits.blinkingDutyCycle = blinkDC;
+
   digitalWrite(_pinCS, LOW);
   SPI.transfer(VM1_ADDRESS_WRITE);
   SPI.transfer(_regVm1.whole);
@@ -36,10 +37,8 @@ void Max7456::setDisplayOffsets(byte horizontal, byte vertical) {
   digitalWrite(_pinCS, LOW);
   SPI.transfer(HOS_ADDRESS_WRITE);
   SPI.transfer(_regHos.whole);
-
   SPI.transfer(VOS_ADDRESS_WRITE);
   SPI.transfer(_regVos.whole);
-
   digitalWrite(_pinCS, HIGH);
 }
 
@@ -111,11 +110,11 @@ void Max7456::getCharacter(charact chara, byte x, byte y) {
 
   digitalWrite(_pinCS, HIGH);
 }
+
 //-----------------------------------------------------------------------------
 // Implements Max7456::printCharacterToSerial
 //-----------------------------------------------------------------------------
 void Max7456::printCharacterToSerial(const charact array, bool img) {
-
   if (img) {
     CARACT car;
     car = Max7456::byteArray2CARACT(array);
@@ -128,7 +127,6 @@ void Max7456::printCharacterToSerial(const charact array, bool img) {
         printPixel(car.line[i].pixels[j].pix2);
         printPixel(car.line[i].pixels[j].pix3);
       }
-
       Serial.println("");
     }
     Serial.println("------------");
@@ -216,7 +214,6 @@ void Max7456::printMax7456Chars(byte chars[], byte size, byte x, byte y,
   // Datasheet page 28-29
   digitalWrite(_pinCS, LOW);
   SPI.transfer(DMM_ADDRESS_WRITE);
-
   SPI.transfer(_regDmm.whole);
   // Datasheet page 31
   SPI.transfer(DMAH_ADDRESS_WRITE); // set start address high
@@ -240,7 +237,6 @@ void Max7456::printMax7456Chars(byte chars[], byte size, byte x, byte y,
 //-----------------------------------------------------------------------------
 // Implements Max7456::print
 //-----------------------------------------------------------------------------
-
 void Max7456::print(double value, byte x, byte y, byte before, byte after,
                     byte blink, byte inv) {
   char* strValue = NULL;
@@ -258,8 +254,8 @@ void Max7456::print(double value, byte x, byte y, byte before, byte after,
   }
   if (value < 0)
     strValue[0] = '-';
-  if (after ==
-      0) //If the result is bigger, we truncate it so the OSD won't be falsed.
+  if (after == 0)
+    //If the result is bigger, we truncate it so the OSD won't be falsed.
     strValue[before] = '\0';
   else
     strValue[before + after + 1] = '\0';
@@ -290,7 +286,6 @@ void Max7456::clearScreen() {
   _regDmm.bits.clearDisplayMemory = 1;
   // Datasheet page 29
   digitalWrite(_pinCS, LOW);
-
   SPI.transfer(DMM_ADDRESS_WRITE);
   SPI.transfer(_regDmm.whole);
 
@@ -337,7 +332,6 @@ void Max7456::init(byte iPinCS) {
   _regVm0.bits.verticalSynch = 1;
 
   SPI.transfer(VM0_ADDRESS_WRITE);
-
   SPI.transfer(_regVm0.whole);
   digitalWrite(_pinCS, HIGH);
 }
@@ -347,7 +341,6 @@ void Max7456::init(byte iPinCS) {
 //-----------------------------------------------------------------------------
 void Max7456::activateOSD(bool act) {
   if (_isActivatedOsd != act) {
-
     _regVm0.bits.videoSelect = 1;
     if (act)
       _regVm0.bits.enableOSD = 1;
