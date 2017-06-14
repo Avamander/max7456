@@ -55,17 +55,14 @@ Max7456::Max7456()
 {
 }
 
-
 //-----------------------------------------------------------------------------
 // Implements Max7456::sendCharacter
 //-----------------------------------------------------------------------------
 void Max7456::sendCharacter(const charact chara, byte x, byte y)
 {
 	byte charAddress;
-	if(y<0)
-		charAddress = x;
-	else
-		charAddress = x + (y<<4);
+	charAddress = x + (y<<4);
+
 	activateOSD(false);
 	// Datasheet page 38
 	digitalWrite(_pinCS,LOW);
@@ -103,11 +100,7 @@ void Max7456::getCharacter(charact chara, byte x, byte y)
 {
 	byte charAddress;
 
-
-	if(y<=0)
-		charAddress = x;
-	else
-		charAddress = x + y*16;
+	charAddress = x + y*16;
 
 	activateOSD(false);
 	// Datasheet page 38
