@@ -433,16 +433,15 @@ void Max7456::activateOSD(bool act)
 	}
 }
 
-
 //-----------------------------------------------------------------------------
 // Implements Max7456::activateExternalVideo
 //-----------------------------------------------------------------------------
 void Max7456::activateExternalVideo(bool activExtVid)
 {
 	if(!activExtVid)
-		_regVm0.bits.synchSelect = 3; //11
+		_regVm0.bits.synchSelect = 0b11;
 	else
-		_regVm0.bits.synchSelect = 0; //0
+		_regVm0.bits.synchSelect = 0b00;
 
 	digitalWrite(_pinCS,LOW);
 	SPI.transfer(VM0_ADDRESS_WRITE);
