@@ -9,10 +9,12 @@
 #ifndef MAX7456_H
 #define MAX7456_H
 
-//def next only if you changed your table for an ascii one
-//i.e address 0x00 -> ' '
-//....
-//    address 0x5A -> 'z'
+/**
+ * Define MAX7456_TABLE_ASCII only if you changed your table for an ASCII-like one
+ * ie. address 0x00 -> ' '
+ *     …
+ *     address 0x5A -> 'z'
+ */
 #define MAX7456_TABLE_ASCII
 
 #include "max7456registers.h"
@@ -74,7 +76,7 @@ public:
   void clearScreen();
 
   /**
-   *  Activate osd on screen
+   *  Activate OSD
    *  @param act :
    *  @li if true OSD is activated
    *  @li if false OSD is deactivated
@@ -113,14 +115,14 @@ public:
   /**
    *  Put a string in the display memory of max7456
    *  @param string : The string to be displayed
-   *  @param x : the horizontal position of the string on screen
-   *  @param y : the vertical position of the string on screen
+   *  @param x : the horizontal position of the string on screen (NTSC/PAL: 0-29)
+   *  @param y : the vertical position of the string on screen (NTSC: 0-12, PAL: 0-15)
    *  @param blink : if 1 then character will blink
    *  @param inv : if 1 then color character will be inverted
-   *  @note : In order to have this function working,
-   *  you must rewrite your Max7456 Eeprom memory and make the first
-   *  characters the ascii characters between ' ' and 'z'
-   *  (' ' being at address 0x00, z being at address 'z'-' ').
+   *  @note : This function assumes you have a ASCII-like charset (not default one)
+   *  You must rewrite your Max7456 EEPROM and set part of ASCII
+   *  characters first: remap from ' ' (0x20) to 'z' (0x7a) at EEPROM start.
+   *  ie. ' ' -> 0x00, z -> 0x5a ('z'-' ').
    */
   void print(const char string[], byte x, byte y, byte blink = 0, byte inv = 0);
 
