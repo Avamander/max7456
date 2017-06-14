@@ -8,9 +8,7 @@
 #ifndef MAX7456REGISTERS_H_
 #define MAX7456REGISTERS_H_
 
-
 #include <Arduino.h>
-
 
 /**
  * @typedef charact
@@ -25,20 +23,18 @@ typedef byte charact[54];
  * @union REG_VM0
  * @brief Represents a Video Mode 0 Register value
  */
-union REG_VM0
-{
+union REG_VM0 {
 	/**@brief The whole value*/
-	unsigned char whole ;
+	unsigned char whole;
 	/**
 	 * @var bits
 	 * @brief access to individual bits*/
-	struct
-	{
+	struct {
 		/**@brief Video BUffer Enable
 		 * @li 0 = Enable
 		 * @li 1 = Disable(VOUT is high impedance)
 		 */
-		unsigned char videoBuffer :1;
+		unsigned char videoBuffer : 1;
 
 		/**@brief Software Reset Bit
 		 * @li When bit set all register are set to default.
@@ -68,7 +64,7 @@ union REG_VM0
 		 * @li 0 = NTSC
 		 * @li 1 = PAL
 		 */
-		unsigned char videoSelect :1;
+		unsigned char videoSelect : 1;
 
 		/**@brief don't care*/
 		unsigned char unused : 1;
@@ -76,22 +72,19 @@ union REG_VM0
 	} bits;
 };
 
-
 #define VM1_ADDRESS_WRITE 0x01
 #define VM1_ADDRESS_READ 0x81
 
 /**@union REG_VM1
  * @brief Represents a Video Mode 1 Register value.
  */
-union REG_VM1
-{
+union REG_VM1 {
 	/**@brief The whole register value*/
 	unsigned char whole;
 	/**
 	 * @var bits
 	 * @brief access to individual bits*/
-	struct
-	{
+	struct {
 
 		/**@brief Blinking Duty Cycle (On:Off)
 		 * @li b00 (0) = BT:BT
@@ -101,7 +94,6 @@ union REG_VM1
 		 */
 		unsigned char blinkingDutyCycle : 2;
 
-
 		/**@brief Blinking Time (BT)
 		 * @li b00 (0) = 2 fields (NTSC = 33ms ; PAL = 40ms)
 		 * @li b01 (1) = 4 fields (NTSC = 67ms ; PAL = 80ms)
@@ -109,7 +101,6 @@ union REG_VM1
 		 * @li b11 (3) = 8 fields (NTSC = 133ms ; PAL = 160ms)
 		 */
 		unsigned char blinkingTime : 2;
-
 
 		/**@brief Background Mode Brightness
 		 * @li b000 (0) = 0%
@@ -137,15 +128,13 @@ union REG_VM1
 /**@union REG_HOS
  * @brief Represents a Horizontal Offset Register value.
  */
-union REG_HOS
-{
+union REG_HOS {
 	/**@brief The whole register value*/
 	unsigned char whole;
 	/**
 	 * @var bits
 	 * @brief access to individual bits*/
-	struct
-	{
+	struct {
 		/**@brief Vertical Position Offset
 		 * @li b00 0000 (0) = Farthest left (-32 pixels)
 		 * @li .
@@ -163,22 +152,19 @@ union REG_HOS
 	} bits;
 };
 
-
 #define VOS_ADDRESS_WRITE 0x03
 #define VOS_ADDRESS_READ 0x83
 
 /**@union REG_VOS
  * @brief Represents a Vertical Offset Register value.
  */
-union REG_VOS
-{
+union REG_VOS {
 	/**@brief The whole register value*/
 	unsigned char whole;
 	/**
 	 * @var bits
 	 * @brief access to individual bits*/
-	struct
-	{
+	struct {
 		/**@brief Vertical Position Offset
 		 * @li b0 0000 (0) = Farthest up (+16 pixels)
 		 * @li .
@@ -200,15 +186,13 @@ union REG_VOS
 /**@union REG_DMM
  * @brief Represents a Display Memory Mode value.
  */
-union REG_DMM
-{
+union REG_DMM {
 	/**@brief The whole register value*/
 	unsigned char whole;
 	/**
 	 * @var bits
 	 * @brief access to individual bits*/
-	struct
-	{
+	struct {
 		/**@brief Auto-Increment Mode
 		 * @li 0 = Disabled
 		 * @li 1 = Enabled
@@ -264,26 +248,21 @@ union REG_DMM
 		/**@brief Don't care*/
 		unsigned char unsused : 1;
 
-
-
 	} bits;
 };
-
 
 #define DMAH_ADDRESS_WRITE 0x05
 #define DMAH_ADDRESS_READ 0x85
 /**@union REG_DMAH
  * @brief Represents a Display Memory Address High Register value
  */
-union REG_DMAH
-{
+union REG_DMAH {
 	/**@brief The whole register value*/
 	unsigned char whole;
 	/**
 	 * @var bits
 	 * @brief access to individual bits*/
-	struct
-	{
+	struct {
 		/**@brief 8th bit for Display Memory Address.
 		 */
 		unsigned char DisplayMemoryAdressBit8 : 1;
@@ -293,11 +272,9 @@ union REG_DMAH
 	} bits;
 };
 
-
 #define DMAL_ADDRESS_WRITE 0x06
 #define DMAL_ADDRESS_READ 0x86
 typedef unsigned char REG_DMAL;
-
 
 #define DMDI_ADDRESS_WRITE 0x07
 #define DMDI_ADDRESS_READ 0x87
@@ -328,15 +305,13 @@ typedef unsigned char REG_CMAL;
 /**@union REG_CMDI
  * @brief Represents a Character Memory Data In Register value
  */
-union REG_CMDI
-{
+union REG_CMDI {
 	/**@brief The whole register value*/
 	unsigned char whole;
 	/**
 	 * @var bits
 	 * @brief access to individual bits*/
-	struct
-	{
+	struct {
 
 		/**@brief value of the right most pixel*/
 		unsigned char rightMostPixel : 2;
@@ -353,23 +328,20 @@ union REG_CMDI
 	} bits;
 };
 
-
 #define OSDM_ADDRESS_WRITE 0x0C
 #define OSDM_ADDRESS_READ 0x8C
 
 /**@union REG_OSDM
  * @brief Represents an OSD Insersion Mux Register value
  */
-union REG_OSDM
-{
+union REG_OSDM {
 	/**@brief The whole register value*/
 	unsigned char whole;
 	/**
 	 * @var bits
 	 * @brief access to individual bits
 	 * */
-	struct
-	{
+	struct {
 		/**@brief OSD Insersion Mux Switching Time
 		 * @li b000 (0) : 30ns (maximum sharpness/maximum crosscolor artifacts )
 		 * @li b001 (1) : 35ns
@@ -379,7 +351,6 @@ union REG_OSDM
 		 * @li b101 (5) : 120ns (minimum sharpness/minimum crosscolor artifacts)
 		 */
 		unsigned char osdInsertionMuxSwitchingTime : 3;
-
 
 		/**@brief OSD Rise And Fall Time
 		 * @li b000 (0) : 20ns (maximum sharpness/maximum crosscolor artifacts )
@@ -391,13 +362,11 @@ union REG_OSDM
 		 */
 		unsigned char osdRiseAndFallTime : 3;
 
-
 		/**@brief don't care*/
 		unsigned char unused : 2;
 
 	} bits;
 };
-
 
 #define RB0_ADDRESS_WRITE 0x10
 #define RB0_ADDRESS_READ 0x90
@@ -450,15 +419,13 @@ union REG_OSDM
 /**@union REG_RBN
  * @brief Represents a Row Brithness Register value (15 of them)
  */
-union REG_RBN
-{
+union REG_RBN {
 	/**@brief The whole register value*/
 	unsigned char whole;
 	/**
 	 * @var bits
 	 * @brief access to individual bits*/
-	struct
-	{
+	struct {
 		/**@brief Character white level
 		 * @li b00 (0) = 120%
 		 * @li b01 (1) = 100%
@@ -486,15 +453,13 @@ union REG_RBN
 /**@union REG_OSDBL
  * @brief Represents an OSD Black Level Register value
  */
-union REG_OSDBL
-{
+union REG_OSDBL {
 	/**@brief The whole register value*/
 	unsigned char whole;
 	/**
 	 * @var bits
 	 * @brief access to individual bits*/
-	struct
-	{
+	struct {
 		/**@brief do not change those bits : factory preset*/
 		unsigned char doNotChange : 4;
 		/**@brief OSD Image Black Level Control.
@@ -513,15 +478,13 @@ union REG_OSDBL
 /**@union REG_STAT
  * @brief Represents a Status Register value
  */
-union REG_STAT
-{
+union REG_STAT {
 	/**@brief The whole register value*/
 	unsigned char whole;
 	/**
 	 * @var bits
 	 * @brief access to individual bits*/
-	struct
-	{
+	struct {
 		/**@brief Detected PAL.
 		 * @li 0 = PAL signal is not detected ad VIN.
 		 * @li 1 = PAL signal is detected at VIN.
@@ -562,7 +525,6 @@ union REG_STAT
 	} bits;
 };
 
-
 #define DMDO_ADDRESS_READ 0xB0
 
 /**@typedef DMDO
@@ -575,15 +537,13 @@ typedef unsigned char DMDO;
 /**@union REG_CMDO
  * @brief Represents a Character Memory Data Out value.
  */
-union REG_CMDO
-{
+union REG_CMDO {
 	/**@brief The whole register value*/
 	unsigned char whole;
 	/**
 	 * @var bits
 	 * @brief access to individual bits*/
-	struct
-	{
+	struct {
 		/**@brief right most pixel*/
 		unsigned char rightMostPowel : 2;
 		/**@brief right center pixel*/
@@ -595,38 +555,30 @@ union REG_CMDO
 	} bits;
 };
 
-
-
-
 /**\def COLOR_BLACK
  * \brief Black value for a pixel (2bits)
  */
-#define COLOR_BLACK       0
-
+#define COLOR_BLACK 0
 
 /**\def COLOR_WHITE
  * \brief White value for a pixel (2bits)
  */
-#define COLOR_WHITE       2
-
+#define COLOR_WHITE 2
 
 /**\def COLOR_TRANSPARENT
  * \brief Transparent value for a pixel (2bits)
  */
 #define COLOR_TRANSPARENT 1
 
-
 /**\def COLOR_GREY
  * \brief Grey value for a pixel (2bits)
  */
 #define COLOR_GREY COLOR_TRANSPARENT
 
-
 /**@struct PIXEL
  * @brief represent a 4-pixels value
  */
-struct PIXEL
-{
+struct PIXEL {
 	/**@brief 4th pixel*/
 	byte pix3 : 2;
 	/**@brief 3rd pixel*/
@@ -634,51 +586,46 @@ struct PIXEL
 	/**@brief 2nd pixel*/
 	byte pix1 : 2;
 
-
 	/**@brief 1st pixel*/
 	byte pix0 : 2;
-
 };
 
 /**@union LINE
  * @brief Represents a line in a max7456 character ie. 12 pixels
  */
-union LINE
-{
+union LINE {
 	/**@brief the whole line*/
 	byte whole[3];
 	/**@brief individual 4-pixels access*/
 	struct PIXEL pixels[3];
 };
 
-
 /**
  * @union CARACT
  * @brief Represents a character with lines and pixels.
  * 	example : myCarac.line[3].pixels[2].pix2 = COLOR_TRANSPARENT ;
  */
-union CARACT
-{
+union CARACT {
 	/**@brief the whole CARACT as in max7456 Character Memory*/
 	charact whole;
 	/**@brief acces with lines*/
 	union LINE line[18];
 };
 
-
-enum{
-_BT_BT=0,
-_BT_2BT,
-_BT_3BT,
-_3BT_BT
+enum
+{
+	_BT_BT = 0,
+	_BT_2BT,
+	_BT_3BT,
+	_3BT_BT
 };
 
-enum{
-_2fields=0,
-_4fields,
-_6fields,
-_8fields
+enum
+{
+	_2fields = 0,
+	_4fields,
+	_6fields,
+	_8fields
 };
-
 
 #endif /* MAX7456REGISTERS_H_ */
