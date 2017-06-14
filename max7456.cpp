@@ -268,13 +268,6 @@ void Max7456::printMax7456Chars(byte chars[],byte size,byte x, byte y, byte blin
 	//end character (we're done).
 	SPI.transfer(DMDI_ADDRESS_WRITE);
 	SPI.transfer(0xff);
-
-/*
-	_regVm0.bits.
-	SPI.transfer(VM0_ADDRESS_WRITE);
-	SPI.transfer(0x4c);*/
-
-
 	digitalWrite(_pinCS,HIGH);
 }
 
@@ -391,14 +384,6 @@ void Max7456::init(byte iPinCS)
 	SPI.transfer(VM0_ADDRESS_WRITE);
 
 	SPI.transfer(_regVm0.whole);
-
-
-	//  digitalWrite(_pinCS,HIGH);
-	//
-	//  digitalWrite(_pinCS,LOW);
-	//SPI.transfer(VM1_ADDRESS_WRITE);
-	//SPI.transfer(0x0C);
-
 	digitalWrite(_pinCS,HIGH);
 
 }
