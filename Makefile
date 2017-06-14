@@ -6,5 +6,5 @@ style:
 		-style=file \
 		-i \
 		*.cpp \
-		*.h
-		#examples/*/*.ino
+		*.h \
+		examples/*/*.ino

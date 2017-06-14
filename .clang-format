@@ -1,14 +1,15 @@
 Language: Cpp
 BasedOnStyle: LLVM
-UseTab: ForIndentation
-IndentWidth: 8
+UseTab: Never
+IndentWidth: 2
 AlignConsecutiveDeclarations: true
 AllowShortFunctionsOnASingleLine: false
 BreakBeforeBraces: Custom
 BraceWrapping:
-  AfterControlStatement: true
-  AfterFunction: true
+  AfterControlStatement: false
+  AfterFunction: false
   AfterClass: true
   AfterEnum: true
+  BeforeElse: false
 ReflowComments: false
 PointerAlignment: Left
