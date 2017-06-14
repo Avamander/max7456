@@ -16,6 +16,7 @@ Max7456::Max7456(byte pinCS)
 //-----------------------------------------------------------------------------
 void Max7456::setBlinkParams(byte blinkBase, byte blinkDC)
 {
+	// Datasheet page 26
 	_regVm1.bits.blinkingTime = blinkBase;
 	_regVm1.bits.blinkingDutyCycle = blinkDC;
 	digitalWrite(_pinCS,LOW);
@@ -30,7 +31,7 @@ void Max7456::setBlinkParams(byte blinkBase, byte blinkDC)
 //----------------------------------------------------------------------------
 void Max7456::setDisplayOffsets(byte horizontal, byte vertical)
 {
-	
+	// Datasheet page 26-27
 	_regHos.whole = 0;
 	_regVos.whole = 0;
 	
@@ -66,7 +67,7 @@ void Max7456::sendCharacter(const charact chara, byte x, byte y)
 	else
 		charAddress = x + (y<<4);
 	activateOSD(false);
-	//datasheet p38
+	// Datasheet page 38
 	digitalWrite(_pinCS,LOW);
 	SPI.transfer(CMAH_ADDRESS_WRITE);
 	SPI.transfer(charAddress);
@@ -109,9 +110,8 @@ void Max7456::getCharacter(charact chara, byte x, byte y)
 		charAddress = x + y*16;
 
 	activateOSD(false);
-	//datasheet p38
+	// Datasheet page 38
 	digitalWrite(_pinCS,LOW);
-
 
 	SPI.transfer(CMAH_ADDRESS_WRITE);
 	SPI.transfer(charAddress);
@@ -249,14 +249,14 @@ void Max7456::printMax7456Chars(byte chars[],byte size,byte x, byte y, byte blin
 	_regDmm.bits.INV = inv;
 	_regDmm.bits.BLK = blink;
 
+	// Datasheet page 28-29
 	digitalWrite(_pinCS,LOW);
 	SPI.transfer(DMM_ADDRESS_WRITE);
 
 
 
 	SPI.transfer(_regDmm.whole);
-
-
+	// Datasheet page 31
 	SPI.transfer(DMAH_ADDRESS_WRITE); // set start address high
 	SPI.transfer(posAddressHI);
 
@@ -342,7 +342,7 @@ byte Max7456::giveMax7456CharFromAsciiChar(char ascii)
 void Max7456::clearScreen()
 {
 	_regDmm.bits.clearDisplayMemory = 1 ;
-
+	// Datasheet page 29
 	digitalWrite(_pinCS, LOW);
 
 	SPI.transfer(DMM_ADDRESS_WRITE);
