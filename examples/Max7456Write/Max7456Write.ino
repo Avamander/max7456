@@ -22,7 +22,7 @@ void setup() {
   Serial.println(F("Initializing..."));
   osd = new Max7456(10); //new Max7456 with CS on pin 9.
   Serial.println(F("Updating MAX7456 charset"));
-  Serial.println(F("Aare you sure? (y/n)"));
+  Serial.println(F("Are you sure? (y/n)"));
   bool goodChar = false;
 
   osd->activateOSD(false); // Deactivate osd display.
